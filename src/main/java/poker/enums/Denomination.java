@@ -1,4 +1,4 @@
-package poker;
+package poker.enums;
 
 import java.util.Arrays;
 import java.util.List;

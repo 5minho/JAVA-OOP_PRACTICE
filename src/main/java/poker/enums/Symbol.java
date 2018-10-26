@@ -1,4 +1,4 @@
-package poker;
+package poker.enums;
 
 /**
  * IDE : IntelliJ IDEA

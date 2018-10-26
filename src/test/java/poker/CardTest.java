@@ -13,29 +13,5 @@ import static org.junit.Assert.*;
  */
 public class CardTest {
 
-    @Test
-    public void Card_deck_은_52장의_카드뭉치다() {
-        List<Card> cards = Card.deck();
-        assertEquals(cards.size(), 52);
-    }
 
-    @Test
-    public void Card_deck_은_4종류의_모양이있다() {
-        long symbolCount = Card.deck()
-                .stream()
-                .map(Card::getSymbol)
-                .distinct()
-                .count();
-        assertEquals(4, symbolCount);
-    }
-
-    @Test
-    public void Card_deck_은_13종류의_끗수가_있다() {
-        long denoCount = Card.deck()
-                .stream()
-                .map(Card::getDenomination)
-                .distinct()
-                .count();
-        assertEquals(13, denoCount);
-    }
 }
