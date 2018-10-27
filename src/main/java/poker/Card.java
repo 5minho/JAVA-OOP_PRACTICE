@@ -24,4 +24,14 @@ public class Card {
     public Denomination getDenomination() {
         return denomination;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Card)) {
+            return false;
+        }
+        Card another = (Card) obj;
+        return this.symbol.equals(another.getSymbol()) &&
+                this.denomination.equals(another.getDenomination());
+    }
 }

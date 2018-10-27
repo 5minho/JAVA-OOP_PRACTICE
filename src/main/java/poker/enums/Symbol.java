@@ -8,5 +8,5 @@ public enum Symbol {
     SPADE ,
     DIAMOND ,
     HEART ,
-    CLOVER ;
+    CLOVER
 }

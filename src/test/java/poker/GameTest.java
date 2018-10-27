@@ -1,6 +1,7 @@
 package poker;
 
 import org.junit.Before;
+import org.junit.Test;
 
 
 /**
@@ -14,6 +15,11 @@ public class GameTest {
     @Before
     public void setUp() {
         game = new Game();
+    }
+
+    @Test
+    public void Game_객체는_게임_시작_전_Dealer_와_Deck_을_생성해_Dealer_에게_Deck_을_주입해준다() {
+        game.prepare();
     }
 
 }
