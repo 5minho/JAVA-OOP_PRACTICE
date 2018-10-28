@@ -33,4 +33,27 @@ public class CardTest {
         Card spade6Card = new Card(Symbol.SPADE, Denomination.six);
         assertNotEquals(spade5Card, spade6Card);
     }
+
+    @Test
+    public void 같은모양의_카드는_끗수가_높을수록_높은카드이다() {
+        Card spadeA = new Card(Symbol.SPADE, Denomination.A);
+        Card spadeTwo = new Card(Symbol.SPADE, Denomination.two);
+        Card spadeThree = new Card(Symbol.SPADE, Denomination.three);
+
+        assertTrue(spadeThree.higherThan(spadeTwo));
+        assertTrue(spadeA.higherThan(spadeTwo));
+        assertTrue(spadeTwo.lowerThan(spadeA));
+    }
+
+    @Test
+    public void 같은숫자의_카드는_SPADE_DIAMOND_HEART_CLOVER_순으로_높은카드이다() {
+        Card spadeA = new Card(Symbol.SPADE, Denomination.A);
+        Card diamondA = new Card(Symbol.DIAMOND, Denomination.A);
+        Card heartA = new Card(Symbol.HEART, Denomination.A);
+        Card cloverA = new Card(Symbol.CLOVER, Denomination.A);
+
+        assertTrue(spadeA.higherThan(diamondA));
+        assertTrue(diamondA.higherThan(heartA));
+        assertTrue(heartA.higherThan(cloverA));
+    }
 }

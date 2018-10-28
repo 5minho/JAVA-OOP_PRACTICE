@@ -8,7 +8,8 @@ import poker.enums.Symbol;
  * IDE : IntelliJ IDEA
  * Created by minho on 26/10/2018.
  */
-public class Card {
+public class Card implements Comparable<Card> {
+
     private Symbol symbol;
     private Denomination denomination;
 
@@ -33,5 +34,21 @@ public class Card {
         Card another = (Card) obj;
         return this.symbol.equals(another.getSymbol()) &&
                 this.denomination.equals(another.getDenomination());
+    }
+
+    public boolean higherThan(Card card) {
+        return compareTo(card) > 0;
+    }
+
+    public boolean lowerThan(Card card) {
+        return compareTo(card) < 0;
+    }
+
+    @Override
+    public int compareTo(Card o) {
+        if (this.denomination == o.getDenomination()) {
+            return this.symbol.compareTo(o.getSymbol());
+        }
+        return this.denomination.compareTo(o.getDenomination());
     }
 }

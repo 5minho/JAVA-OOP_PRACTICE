@@ -2,9 +2,6 @@ package poker;
 
 import poker.exceptions.TooManyCardsException;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * IDE : IntelliJ IDEA
  * Created by minho on 27/10/2018.
@@ -12,24 +9,21 @@ import java.util.List;
 
 public class Player {
 
-    protected List<Card> cards = new ArrayList<>();
+    private CardBundle holdingCards = new HoldingCards();
 
     public void receive(Card card) throws TooManyCardsException {
         if (hasTooManyCard()) {
             throw new TooManyCardsException();
         }
-        cards.add(card);
+        holdingCards.push(card);
     }
 
     private boolean hasTooManyCard() {
-        return cards.size() >= 7;
+        return holdingCards.size() >= 7;
     }
 
     public int cardsCount() {
-        return cards.size();
+        return holdingCards.size();
     }
 
-    boolean has(Card card) {
-        return cards.contains(card);
-    }
 }
