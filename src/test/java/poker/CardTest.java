@@ -28,7 +28,7 @@ public class CardTest {
     }
 
     @Test
-    public void Denomication이_다른카드는_다른카드로_취급한다() {
+    public void Denomination이_다른카드는_다른카드로_취급한다() {
         Card spade5Card = new Card(Symbol.SPADE, Denomination.five);
         Card spade6Card = new Card(Symbol.SPADE, Denomination.six);
         assertNotEquals(spade5Card, spade6Card);

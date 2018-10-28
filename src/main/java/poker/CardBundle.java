@@ -3,7 +3,6 @@ package poker;
 import poker.exceptions.AlreadyExistCardAddException;
 import poker.exceptions.NotExistCardRemoveException;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
@@ -45,7 +44,4 @@ public abstract class CardBundle {
         cards.remove(card);
     }
 
-    protected void sortByDenomination() {
-//        cards.sort();
-    }
 }

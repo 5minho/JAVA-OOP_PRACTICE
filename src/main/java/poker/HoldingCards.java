@@ -1,11 +1,14 @@
 package poker;
 
-import poker.Card;
+import poker.enums.Denomination;
 import poker.enums.PokerHands;
+import poker.enums.Symbol;
+import poker.exceptions.NotEnoughCardsCountException;
 
-import java.util.List;
-import java.util.Stack;
-import java.util.function.Function;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.groupingBy;
 
 /**
  * IDE : IntelliJ IDEA
@@ -17,15 +20,79 @@ public class HoldingCards extends CardBundle {
         super();
     }
 
-    HoldingCards(List<Card> cards) {
+    public HoldingCards(List<Card> cards) {
         super();
         this.cards.addAll(cards);
     }
 
-    public PokerHands pokerHands() {
-        if (PokerHands.STRAIGHT_FLUSH.check(this)) {
-            return PokerHands.STRAIGHT_FLUSH;
+    public Card highCard() {
+        return Collections.max(cards);
+    }
+
+    public PokerHands pokerHands() throws NotEnoughCardsCountException {
+        if (this.cards.size() < 5) {
+            throw new NotEnoughCardsCountException();
         }
-        return null;
+        return PokerHands.check(this);
+    }
+
+    public HoldingCards sorted() {
+        return new HoldingCards(cards.stream()
+                .sorted()
+                .collect(Collectors.toList()));
+    }
+
+    public boolean isFlush() {
+        return groupingBySymbol()
+                .values()
+                .stream()
+                .map(List::size)
+                .max(Integer::compareTo)
+                .orElse(0) >= 5;
+    }
+
+    public boolean isStraight() {
+        return isStraight(cards);
+    }
+
+    private boolean isStraight(List<Card> cards) {
+        if (cards.size() < 1) { return false; }
+        List<Integer> orders = cards.stream()
+                .map(Card::getDenomination)
+                .map(Denomination::getOrder)
+                .sorted()
+                .collect(Collectors.toList());
+
+        int sequenceNum = 1;
+        int curr = orders.get(0);
+
+        if (curr == 2 && orders.containsAll(Arrays.asList(2, 3, 4, 5, 14))) {
+            return true;
+        }
+
+        for (int next : orders.subList(1, orders.size())) {
+            sequenceNum = (curr + 1 == next) ? sequenceNum + 1 : 1;
+            if (sequenceNum >= 5) { return true; }
+            curr = next;
+        }
+
+        return false;
+    }
+
+    private Map<Symbol, List<Card>> groupingBySymbol() {
+        return cards.stream()
+                .collect(groupingBy(Card::getSymbol));
+    }
+
+    public boolean isStraightFlush() {
+        if (!isFlush()) {
+            return false;
+        }
+        List<Card> cards = groupingBySymbol().values()
+                .stream()
+                .filter(groupingCards -> groupingCards.size() >= 5)
+                .findAny()
+                .orElse(new ArrayList<>());
+        return isStraight(cards);
     }
 }

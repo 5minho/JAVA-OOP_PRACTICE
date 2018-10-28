@@ -55,8 +55,4 @@ public class PlayerTest {
             e.printStackTrace();
         }
     }
-
-    @Test
-    public void has() {
-    }
 }
