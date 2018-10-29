@@ -10,11 +10,11 @@ import java.util.Stack;
  * IDE : IntelliJ IDEA
  * Created by minho on 28/10/2018.
  */
-public abstract class CardBundle {
+public abstract class Cards {
 
     protected Stack<Card> cards;
 
-    CardBundle() {
+    Cards() {
         cards = new Stack<>();
     }
 
@@ -43,5 +43,4 @@ public abstract class CardBundle {
         }
         cards.remove(card);
     }
-
 }

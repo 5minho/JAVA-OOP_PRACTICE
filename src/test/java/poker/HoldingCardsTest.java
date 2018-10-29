@@ -3,7 +3,6 @@ package poker;
 import org.junit.Before;
 import org.junit.Test;
 import poker.enums.Denomination;
-import poker.enums.PokerHands;
 import poker.enums.Symbol;
 
 import java.util.Arrays;

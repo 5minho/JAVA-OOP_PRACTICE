@@ -3,7 +3,6 @@ package poker;
 import poker.enums.Denomination;
 import poker.enums.PokerHands;
 import poker.enums.Symbol;
-import poker.exceptions.NotEnoughCardsCountException;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -14,7 +13,7 @@ import static java.util.stream.Collectors.groupingBy;
  * IDE : IntelliJ IDEA
  * Created by minho on 28/10/2018.
  */
-public class HoldingCards extends CardBundle {
+public class HoldingCards extends Cards {
 
     HoldingCards() {
         super();
@@ -27,13 +26,6 @@ public class HoldingCards extends CardBundle {
 
     public Card highCard() {
         return Collections.max(cards);
-    }
-
-    public PokerHands pokerHands() throws NotEnoughCardsCountException {
-        if (this.cards.size() < 5) {
-            throw new NotEnoughCardsCountException();
-        }
-        return PokerHands.check(this);
     }
 
     public HoldingCards sorted() {
@@ -84,6 +76,11 @@ public class HoldingCards extends CardBundle {
                 .collect(groupingBy(Card::getSymbol));
     }
 
+    private Map<Denomination, List<Card>> groupingByDenomination() {
+        return cards.stream()
+                .collect(groupingBy(Card::getDenomination));
+    }
+
     public boolean isStraightFlush() {
         if (!isFlush()) {
             return false;
@@ -94,5 +91,13 @@ public class HoldingCards extends CardBundle {
                 .findAny()
                 .orElse(new ArrayList<>());
         return isStraight(cards);
+    }
+
+    public boolean isOnePair() {
+        return groupingByDenomination().values()
+                .stream()
+                .map(List::size)
+                .max(Integer::compareTo)
+                .orElse(0) >= 2;
     }
 }

@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
  * Created by minho on 26/10/2018.
  */
 
-public class Deck extends CardBundle {
+public class Deck extends Cards {
 
     public static int CARD_NUM = 52;
 

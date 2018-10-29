@@ -9,7 +9,7 @@ import poker.exceptions.TooManyCardsException;
 
 public class Player {
 
-    private CardBundle holdingCards = new HoldingCards();
+    private Cards holdingCards = new HoldingCards();
 
     public void receive(Card card) throws TooManyCardsException {
         if (hasTooManyCard()) {

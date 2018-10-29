@@ -1,5 +1,6 @@
 package poker.enums;
 
+
 import poker.HoldingCards;
 import poker.exceptions.UndefinedPokerHandsException;
 
@@ -13,9 +14,10 @@ public enum PokerHands {
     STRAIGHT_FLUSH(HoldingCards::isStraightFlush),
     FLUSH(HoldingCards::isFlush),
     STRAIGHT(HoldingCards::isStraight),
+    ONE_PAIR(HoldingCards::isOnePair),
     HIGH_CARD;
 
-    private Function <HoldingCards, Boolean> checkingMethod;
+    private Function<HoldingCards, Boolean> checkingMethod;
 
     PokerHands() { }
 
@@ -34,5 +36,6 @@ public enum PokerHands {
         }
         throw new UndefinedPokerHandsException();
     }
-
 }
+
+
