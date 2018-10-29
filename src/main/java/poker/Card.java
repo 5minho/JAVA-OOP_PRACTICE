@@ -51,4 +51,9 @@ public class Card implements Comparable<Card> {
         }
         return this.denomination.compareTo(o.getDenomination());
     }
+
+    @Override
+    public String toString() {
+        return symbol + " " + denomination;
+    }
 }

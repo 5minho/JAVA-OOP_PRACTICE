@@ -1,7 +1,6 @@
 package poker;
 
 import poker.enums.Denomination;
-import poker.enums.PokerHands;
 import poker.enums.Symbol;
 
 import java.util.*;
@@ -43,40 +42,12 @@ public class HoldingCards extends Cards {
                 .orElse(0) >= 5;
     }
 
-    public boolean isStraight() {
-        return isStraight(cards);
-    }
-
-    private boolean isStraight(List<Card> cards) {
-        if (cards.size() < 1) { return false; }
-        List<Integer> orders = cards.stream()
-                .map(Card::getDenomination)
-                .map(Denomination::getOrder)
-                .sorted()
-                .collect(Collectors.toList());
-
-        int sequenceNum = 1;
-        int curr = orders.get(0);
-
-        if (curr == 2 && orders.containsAll(Arrays.asList(2, 3, 4, 5, 14))) {
-            return true;
-        }
-
-        for (int next : orders.subList(1, orders.size())) {
-            sequenceNum = (curr + 1 == next) ? sequenceNum + 1 : 1;
-            if (sequenceNum >= 5) { return true; }
-            curr = next;
-        }
-
-        return false;
-    }
-
-    private Map<Symbol, List<Card>> groupingBySymbol() {
+    public Map<Symbol, List<Card>> groupingBySymbol() {
         return cards.stream()
                 .collect(groupingBy(Card::getSymbol));
     }
 
-    private Map<Denomination, List<Card>> groupingByDenomination() {
+    public Map<Denomination, List<Card>> groupingByDenomination() {
         return cards.stream()
                 .collect(groupingBy(Card::getDenomination));
     }
@@ -90,7 +61,7 @@ public class HoldingCards extends Cards {
                 .filter(groupingCards -> groupingCards.size() >= 5)
                 .findAny()
                 .orElse(new ArrayList<>());
-        return isStraight(cards);
+        return false;
     }
 
     public boolean isOnePair() {

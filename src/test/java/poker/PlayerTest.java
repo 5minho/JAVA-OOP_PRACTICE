@@ -34,18 +34,18 @@ public class PlayerTest {
     @Test(expected = TooManyCardsException.class)
     public void 플레이어는_최대로_7장의_카드만_받을_수_있다() throws TooManyCardsException {
         give7CardsToPlayer();
-        player.receive(new Card(Symbol.SPADE, Denomination.eight));
+        player.receive(new Card(Symbol.SPADE, Denomination.EIGHT));
     }
 
     private void give7CardsToPlayer() {
         List<Card> cards = Arrays.asList(
                 new Card(Symbol.SPADE, Denomination.A),
-                new Card(Symbol.SPADE, Denomination.two),
-                new Card(Symbol.SPADE, Denomination.three),
-                new Card(Symbol.SPADE, Denomination.four),
-                new Card(Symbol.SPADE, Denomination.five),
-                new Card(Symbol.SPADE, Denomination.six),
-                new Card(Symbol.SPADE, Denomination.seven)
+                new Card(Symbol.SPADE, Denomination.TWO),
+                new Card(Symbol.SPADE, Denomination.THREE),
+                new Card(Symbol.SPADE, Denomination.FOUR),
+                new Card(Symbol.SPADE, Denomination.FIVE),
+                new Card(Symbol.SPADE, Denomination.SIX),
+                new Card(Symbol.SPADE, Denomination.SEVEN)
         );
         try {
             for (Card card : cards) {

@@ -22,10 +22,10 @@ public class HoldingCardsTest {
     public void setUp () {
         holdingCards = new HoldingCards(Arrays.asList(
                 new Card(Symbol.SPADE, Denomination.A),
-                new Card(Symbol.HEART, Denomination.ten),
-                new Card(Symbol.CLOVER, Denomination.nine),
-                new Card(Symbol.DIAMOND, Denomination.seven),
-                new Card(Symbol.SPADE, Denomination.eight)
+                new Card(Symbol.HEART, Denomination.TEN),
+                new Card(Symbol.CLOVER, Denomination.NINE),
+                new Card(Symbol.DIAMOND, Denomination.SEVEN),
+                new Card(Symbol.SPADE, Denomination.EIGHT)
         ));
     }
 
@@ -35,15 +35,15 @@ public class HoldingCardsTest {
         List<Card> afterSortedCards = holdingCards.sorted().getCards();
 
         assertEquals(new Card(Symbol.SPADE, Denomination.A), beforeSortedCards.get(0));
-        assertEquals(new Card(Symbol.HEART, Denomination.ten), beforeSortedCards.get(1));
-        assertEquals(new Card(Symbol.CLOVER, Denomination.nine), beforeSortedCards.get(2));
-        assertEquals(new Card(Symbol.DIAMOND, Denomination.seven), beforeSortedCards.get(3));
-        assertEquals(new Card(Symbol.SPADE, Denomination.eight), beforeSortedCards.get(4));
+        assertEquals(new Card(Symbol.HEART, Denomination.TEN), beforeSortedCards.get(1));
+        assertEquals(new Card(Symbol.CLOVER, Denomination.NINE), beforeSortedCards.get(2));
+        assertEquals(new Card(Symbol.DIAMOND, Denomination.SEVEN), beforeSortedCards.get(3));
+        assertEquals(new Card(Symbol.SPADE, Denomination.EIGHT), beforeSortedCards.get(4));
 
-        assertEquals(new Card(Symbol.DIAMOND, Denomination.seven), afterSortedCards.get(0));
-        assertEquals(new Card(Symbol.SPADE, Denomination.eight), afterSortedCards.get(1));
-        assertEquals(new Card(Symbol.CLOVER, Denomination.nine), afterSortedCards.get(2));
-        assertEquals(new Card(Symbol.HEART, Denomination.ten), afterSortedCards.get(3));
+        assertEquals(new Card(Symbol.DIAMOND, Denomination.SEVEN), afterSortedCards.get(0));
+        assertEquals(new Card(Symbol.SPADE, Denomination.EIGHT), afterSortedCards.get(1));
+        assertEquals(new Card(Symbol.CLOVER, Denomination.NINE), afterSortedCards.get(2));
+        assertEquals(new Card(Symbol.HEART, Denomination.TEN), afterSortedCards.get(3));
         assertEquals(new Card(Symbol.SPADE, Denomination.A), afterSortedCards.get(4));
     }
 

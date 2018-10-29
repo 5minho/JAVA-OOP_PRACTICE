@@ -14,33 +14,38 @@ public abstract class Cards {
 
     protected Stack<Card> cards;
 
-    Cards() {
+    public Cards() {
         cards = new Stack<>();
     }
 
-    protected int size() {
+    public Cards(List<Card> cards) {
+        cards.addAll(cards);
+    }
+
+    public int size() {
         return cards.size();
     }
 
-    protected List<Card> getCards() {
+    public List<Card> getCards() {
         return cards;
     }
 
-    protected Card pop() {
+    public Card pop() {
         return cards.pop();
     }
 
-    protected void push(Card card) throws AlreadyExistCardAddException {
+    public void push(Card card) throws AlreadyExistCardAddException {
         if (cards.contains(card)) {
             throw new AlreadyExistCardAddException();
         }
         cards.push(card);
     }
 
-    protected void remove(Card card) throws NotExistCardRemoveException {
+    public void remove(Card card) throws NotExistCardRemoveException {
         if (!cards.contains(card)) {
             throw new NotExistCardRemoveException();
         }
         cards.remove(card);
     }
+
 }

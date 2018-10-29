@@ -29,16 +29,16 @@ public class CardTest {
 
     @Test
     public void Denomination이_다른카드는_다른카드로_취급한다() {
-        Card spade5Card = new Card(Symbol.SPADE, Denomination.five);
-        Card spade6Card = new Card(Symbol.SPADE, Denomination.six);
+        Card spade5Card = new Card(Symbol.SPADE, Denomination.FIVE);
+        Card spade6Card = new Card(Symbol.SPADE, Denomination.SIX);
         assertNotEquals(spade5Card, spade6Card);
     }
 
     @Test
     public void 같은모양의_카드는_끗수가_높을수록_높은카드이다() {
         Card spadeA = new Card(Symbol.SPADE, Denomination.A);
-        Card spadeTwo = new Card(Symbol.SPADE, Denomination.two);
-        Card spadeThree = new Card(Symbol.SPADE, Denomination.three);
+        Card spadeTwo = new Card(Symbol.SPADE, Denomination.TWO);
+        Card spadeThree = new Card(Symbol.SPADE, Denomination.THREE);
 
         assertTrue(spadeThree.higherThan(spadeTwo));
         assertTrue(spadeA.higherThan(spadeTwo));
@@ -56,4 +56,5 @@ public class CardTest {
         assertTrue(diamondA.higherThan(heartA));
         assertTrue(heartA.higherThan(cloverA));
     }
+
 }
