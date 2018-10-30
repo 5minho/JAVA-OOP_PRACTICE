@@ -1,6 +1,7 @@
 package poker.rule;
 
 import poker.Card;
+import poker.Cards;
 import poker.HoldingCards;
 import poker.enums.Denomination;
 import poker.exceptions.NotMatchedPokerHandsException;
@@ -16,8 +17,12 @@ import java.util.stream.Collectors;
  */
 public class Straight extends PokerHands {
 
+    public Straight(Cards cards) throws NotMatchedPokerHandsException {
+        super(cards);
+    }
+
     @Override
-    public Info check(HoldingCards holdingCards) throws NotMatchedPokerHandsException {
+    protected void check(Cards holdingCards) throws NotMatchedPokerHandsException {
         List<Card> cards = holdingCards.sorted().getCards();
         if (cards.size() < 1) { throw new NotMatchedPokerHandsException();}
 
@@ -26,22 +31,34 @@ public class Straight extends PokerHands {
                 .map(Denomination::getOrder)
                 .collect(Collectors.toList());
 
-        int sequenceNum = 1;
-        int curr = orders.get(0);
+        List<Card> straightCards = new ArrayList<>();
 
-        if (curr == 2 && orders.containsAll(Arrays.asList(2, 3, 4, 5, 14))) {
-            Card highCard = cards.get(orders.lastIndexOf(5));
-            return new Info(highCard + " STRAIGHT", highCard);
+        if (orders.get(0) == 2 && orders.containsAll(Arrays.asList(2, 3, 4, 5, 14))) {
+            straightCards.add(cards.get(orders.lastIndexOf(2)));
+            straightCards.add(cards.get(orders.lastIndexOf(3)));
+            straightCards.add(cards.get(orders.lastIndexOf(4)));
+            straightCards.add(cards.get(orders.lastIndexOf(5)));
+            straightCards.add(cards.get(orders.lastIndexOf(14)));
+            this.cards = straightCards;
+            this.name = highCard() + " STRAIGHT";
+            return;
         }
 
-        for (int i = 1 ; i < orders.size() ; i++) {
-            int next = orders.get(i);
-            sequenceNum = (curr + 1 == next) ? sequenceNum + 1 : 1;
-            if (sequenceNum >= 5) {
-                Card highCard = cards.get(i);
-                return new Info(highCard + " STRAIGHT", highCard);
+        straightCards.add(cards.get(0));
+        int curr = straightCards.get(0).getDenomination().getOrder();
+
+        for (Card card : cards.subList(1, cards.size())) {
+            int next = card.getDenomination().getOrder();
+            if (curr + 1 != next) {
+                straightCards.clear();
             }
-            curr = next;
+            curr = card.getDenomination().getOrder();
+            straightCards.add(card);
+            if (straightCards.size() >= 5) {
+                this.cards = straightCards;
+                this.name = highCard() + " STRAIGHT";
+                return;
+            }
         }
 
         throw new NotMatchedPokerHandsException();

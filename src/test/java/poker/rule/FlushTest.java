@@ -29,8 +29,8 @@ public class FlushTest {
                 new Card(Symbol.SPADE, Denomination.Q)
         ));
 
-        Flush.Info flushInfo = new Flush().check(holdingCards);
-        assertEquals("SPADE A FLUSH", flushInfo.getName());
+        Flush flush = new Flush(holdingCards);
+        assertEquals("SPADE A FLUSH", flush.getName());
 
         holdingCards = new HoldingCards(Arrays.asList(
                 new Card(Symbol.DIAMOND, Denomination.SEVEN),
@@ -42,7 +42,7 @@ public class FlushTest {
                 new Card(Symbol.DIAMOND, Denomination.NINE)
         ));
 
-        flushInfo = new Flush().check(holdingCards);
-        assertEquals("DIAMOND NINE FLUSH", flushInfo.getName());
+        flush = new Flush(holdingCards);
+        assertEquals("DIAMOND NINE FLUSH", flush.getName());
     }
 }

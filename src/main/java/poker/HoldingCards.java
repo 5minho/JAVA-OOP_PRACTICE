@@ -19,18 +19,7 @@ public class HoldingCards extends Cards {
     }
 
     public HoldingCards(List<Card> cards) {
-        super();
-        this.cards.addAll(cards);
-    }
-
-    public Card highCard() {
-        return Collections.max(cards);
-    }
-
-    public HoldingCards sorted() {
-        return new HoldingCards(cards.stream()
-                .sorted()
-                .collect(Collectors.toList()));
+        super(cards);
     }
 
     public boolean isFlush() {
@@ -40,16 +29,6 @@ public class HoldingCards extends Cards {
                 .map(List::size)
                 .max(Integer::compareTo)
                 .orElse(0) >= 5;
-    }
-
-    public Map<Symbol, List<Card>> groupingBySymbol() {
-        return cards.stream()
-                .collect(groupingBy(Card::getSymbol));
-    }
-
-    public Map<Denomination, List<Card>> groupingByDenomination() {
-        return cards.stream()
-                .collect(groupingBy(Card::getDenomination));
     }
 
     public boolean isStraightFlush() {

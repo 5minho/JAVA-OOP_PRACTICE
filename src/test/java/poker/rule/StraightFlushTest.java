@@ -28,9 +28,8 @@ public class StraightFlushTest {
                 new Card(Symbol.DIAMOND, Denomination.K),
                 new Card(Symbol.CLOVER, Denomination.Q)
         ));
-
-        StraightFlush.Info straightFlushInfo = new StraightFlush().check(holdingCards);
-        assertEquals("SPADE FIVE STRAIGHT FLUSH", straightFlushInfo.getName());
+        StraightFlush straightFlush = new StraightFlush(holdingCards);
+        assertEquals("SPADE A STRAIGHT FLUSH", straightFlush.getName());
 
         holdingCards = new HoldingCards(Arrays.asList(
                 new Card(Symbol.SPADE, Denomination.TWO),
@@ -41,7 +40,7 @@ public class StraightFlushTest {
                 new Card(Symbol.DIAMOND, Denomination.K),
                 new Card(Symbol.SPADE, Denomination.SIX)
         ));
-        straightFlushInfo = new StraightFlush().check(holdingCards);
-        assertEquals("SPADE SIX STRAIGHT FLUSH", straightFlushInfo.getName());
+        straightFlush.check(holdingCards);
+        assertEquals("DIAMOND A STRAIGHT FLUSH", straightFlush.getName());
     }
 }

@@ -1,7 +1,6 @@
 package poker.rule;
 
-import poker.Card;
-import poker.HoldingCards;
+import poker.Cards;
 import poker.exceptions.NotMatchedPokerHandsException;
 
 /**
@@ -9,12 +8,16 @@ import poker.exceptions.NotMatchedPokerHandsException;
  * Created by minho on 30/10/2018.
  */
 public class StraightFlush extends Flush {
+
+    public StraightFlush(Cards cards) throws NotMatchedPokerHandsException {
+        super(cards);
+    }
+
     @Override
-    public Info check(HoldingCards holdingCards) throws NotMatchedPokerHandsException {
-        super.check(holdingCards);
-        Info straightFlushInfo = new Straight().check(holdingCards);
-        Card highCard = straightFlushInfo.getHighCard();
-        straightFlushInfo.setName(highCard + " STRAIGHT FLUSH");
-        return straightFlushInfo;
+    protected void check(Cards cards) throws NotMatchedPokerHandsException {
+        super.check(cards);
+        Straight straight = new Straight(cards);
+        this.cards = straight.getCards();
+        this.name = straight.highCard() + " STRAIGHT FLUSH";
     }
 }

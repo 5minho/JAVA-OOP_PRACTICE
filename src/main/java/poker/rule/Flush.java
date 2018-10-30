@@ -1,7 +1,7 @@
 package poker.rule;
 
 import poker.Card;
-import poker.HoldingCards;
+import poker.Cards;
 import poker.enums.Symbol;
 import poker.exceptions.NotMatchedPokerHandsException;
 
@@ -15,8 +15,12 @@ import java.util.Map;
  */
 public class Flush extends PokerHands {
 
+    public Flush(Cards cards) throws NotMatchedPokerHandsException {
+        super(cards);
+    }
+
     @Override
-    public Info check(HoldingCards holdingCards) throws NotMatchedPokerHandsException {
+    protected void check(Cards holdingCards) throws NotMatchedPokerHandsException {
         Map<Symbol, List<Card>> symbolGroup = holdingCards.groupingBySymbol();
         for (Symbol symbol : symbolGroup.keySet()) {
             if (!symbolGroup.containsKey(symbol)) {
@@ -25,7 +29,9 @@ public class Flush extends PokerHands {
             List<Card> cards = symbolGroup.get(symbol);
             if (cards.size() >= 5) {
                 Card highCard = Collections.max(cards);
-                return new Info(highCard + " FLUSH", highCard);
+                name = highCard + " FLUSH";
+                this.cards = cards;
+                return;
             }
         }
         throw new NotMatchedPokerHandsException();

@@ -1,38 +1,28 @@
 package poker.rule;
 import poker.Card;
+import poker.Cards;
 import poker.HoldingCards;
 import poker.exceptions.NotMatchedPokerHandsException;
+
+import java.util.List;
 
 
 /**
  * IDE : IntelliJ IDEA
  * Created by minho on 28/10/2018.
  */
-public abstract class PokerHands {
-    public class Info {
-        private String name;
-        private Card highCard;
+public abstract class PokerHands extends Cards {
+    protected String name;
 
-        Info(String name, Card highCard) {
-            this.name = name;
-            this.highCard = highCard;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public Card getHighCard() {
-            return highCard;
-        }
+    public PokerHands(Cards cards) throws NotMatchedPokerHandsException {
+        check(cards);
     }
 
-    private Info info;
-    abstract public Info check(HoldingCards holdingCards) throws NotMatchedPokerHandsException;
+    abstract protected void check(Cards cards) throws NotMatchedPokerHandsException;
+
+    public String getName() {
+        return name;
+    }
 }
 
 
