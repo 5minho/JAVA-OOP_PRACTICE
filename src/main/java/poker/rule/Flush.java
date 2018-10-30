@@ -20,6 +20,11 @@ public class Flush extends PokerHands {
     }
 
     @Override
+    protected String suffix() {
+        return "FLUSH";
+    }
+
+    @Override
     protected void check(Cards holdingCards) throws NotMatchedPokerHandsException {
         Map<Symbol, List<Card>> symbolGroup = holdingCards.groupingBySymbol();
         for (Symbol symbol : symbolGroup.keySet()) {
@@ -28,9 +33,7 @@ public class Flush extends PokerHands {
             }
             List<Card> cards = symbolGroup.get(symbol);
             if (cards.size() >= 5) {
-                Card highCard = Collections.max(cards);
-                name = highCard + " FLUSH";
-                this.cards = cards;
+                init(cards);
                 return;
             }
         }

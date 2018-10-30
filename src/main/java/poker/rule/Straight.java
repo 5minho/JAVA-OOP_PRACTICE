@@ -22,6 +22,11 @@ public class Straight extends PokerHands {
     }
 
     @Override
+    protected String suffix() {
+        return "STRAIGHT";
+    }
+
+    @Override
     protected void check(Cards holdingCards) throws NotMatchedPokerHandsException {
         List<Card> cards = holdingCards.sorted().getCards();
         if (cards.size() < 1) { throw new NotMatchedPokerHandsException();}
@@ -39,8 +44,7 @@ public class Straight extends PokerHands {
             straightCards.add(cards.get(orders.lastIndexOf(4)));
             straightCards.add(cards.get(orders.lastIndexOf(5)));
             straightCards.add(cards.get(orders.lastIndexOf(14)));
-            this.cards = straightCards;
-            this.name = highCard() + " STRAIGHT";
+            init(straightCards);
             return;
         }
 
@@ -55,8 +59,7 @@ public class Straight extends PokerHands {
             curr = card.getDenomination().getOrder();
             straightCards.add(card);
             if (straightCards.size() >= 5) {
-                this.cards = straightCards;
-                this.name = highCard() + " STRAIGHT";
+                init(straightCards);
                 return;
             }
         }
